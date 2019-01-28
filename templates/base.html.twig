@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Demoliq!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+        <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+        <link rel="stylesheet" href="{{ asset('css/open-sans.css')}}">
+        <link rel="stylesheet" href="{{ asset('css/permanent-marker.css')}}">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <script src="{{ asset('js/bootstrap.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
+        <link rel="icon" type="image/jpg" href="{{ asset('img/icon.jpg')}}" />
+
+
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <a href="{{ path('home') }}"><img src="{{ asset('img/icon.jpg')}}" alt="icon" style="width:20px;height:20px;"></a>
+            </header>
+
+            <main>
+        {% block content %}{% endblock %}
+            </main>
+
+            <footer>
+                {% block footer %}<a href="{{ path('home') }}">Accueil</a> <a href="{{ path('faq') }}">FAQ</a> <a href="{{ path('cgu') }}">CGU</a> <a href="{{ path('fonctionnement') }}">Fonctionnement</a>{% endblock %}
+            </footer>
+        </div>
+    </body>
+</html>

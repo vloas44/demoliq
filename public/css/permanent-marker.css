@@ -1,0 +1,13 @@
+/* permanent-marker-regular - latin */
+@font-face {
+  font-family: 'Permanent Marker';
+  font-style: normal;
+  font-weight: 800;
+  src: url('../fonts/permanent-marker-v7-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Permanent Marker Regular'), local('Permanent Marker'),
+       url('../fonts/permanent-marker-v7-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/permanent-marker-v7-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/permanent-marker-v7-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/permanent-marker-v7-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/permanent-marker-v7-latin-regular.svg#PermanentMarker') format('svg'); /* Legacy iOS */
+}
