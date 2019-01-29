@@ -17,7 +17,7 @@
     <body>
         <div class="container">
             <header>
-                <a href="{{ path('home') }}"><img src="{{ asset('img/icon.jpg')}}" alt="icon" style="width:20px;height:20px;"></a>
+                <a href="{{ path('home') }}"><img src="{{ asset('img/icon.jpg')}}" alt="icon" style="width:20px;height:20px;"> DEMOLIQ</a>
             </header>
 
             <main>
@@ -29,7 +29,8 @@
                 {% block footer %}<a class="nav-link" href="{{ path('home') }}">Accueil</a>
                     <a class="nav-link" href="{{ path('faq') }}">FAQ</a>
                     <a class="nav-link" href="{{ path('cgu') }}">CGU</a>
-                <a class="nav-link" href="{{ path('how_to') }}">Fonctionnement</a>{% endblock %}
+                <a class="nav-link" href="{{ path('how_to') }}">Fonctionnement</a>
+                <a class="nav-link" href="{{ path('question_list') }}">Questions</a>{% endblock %}
                 </nav>
             </footer>
         </div>

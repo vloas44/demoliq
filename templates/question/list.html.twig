@@ -7,11 +7,19 @@
         <tr>
             <th>Question</th>
             <th>Appuis</th>
+            <th>Date</th>
             <th>Actions</th>
         </tr>
 
         {# affichage des questions ici #}
-
+        {% for question in questions %}
+            <tr>
+                <td>{{ question.title }} - {{ question.status}}</td>
+                <td>{{ question.supports }}</td>
+                <td>{{ question.creationDate|date('d-m-Y') }}</td>
+                <td><a class="btn-sm btn-primary" href="#">Débattre</a></td>
+            </tr>
+        {% endfor %}
     </table>
 {% endblock %}
 
