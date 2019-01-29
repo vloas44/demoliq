@@ -17,7 +17,8 @@
                 <td>{{ question.title }} - {{ question.status}}</td>
                 <td>{{ question.supports }}</td>
                 <td>{{ question.creationDate|date('d-m-Y') }}</td>
-                <td><a class="btn-sm btn-primary" href="#">Débattre</a></td>
+                <td><a class="btn-sm btn-primary"
+                       href="{{ path('question_detail',{'id': question.id }) }}" >Débattre</a></td>
             </tr>
         {% endfor %}
     </table>

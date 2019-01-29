@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>{{ question.title }}</h1>
+
+    <div>{{ question.supports }} appuis </div>
+    <div>
+        <a href="#" class="btn btn-success">Appuyer cette proposition</a>
+    </div>
+    <div>{{ question.creationDate|date('d-m-Y H:i:s') }}</div>
+
+    <h2>La question en détails</h2>
+    <div>{{ question.description }}</div>
+
+    <h2>Le débat</h2>
+    {# @todo : afficher les messages reliés à cette question#}
+
+{% endblock %}
+
+{% block title %}{{ question.title }}{% endblock %}
+
