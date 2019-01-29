@@ -7,6 +7,10 @@
 {% block content %}
     <h1>Ajoutez votre question</h1>
     {#Affiche le formulaire#}
-
+    {{ form_start(questionForm, {'attr':{'novalidate':'novalidate'}}) }}
+    {{ form_widget(questionForm) }}
+    {{ form_errors(questionForm) }}
+    <button class="btn btn-success">Envoyer !</button>
+    {{ form_end(questionForm) }}
 {% endblock %}
 

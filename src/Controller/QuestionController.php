@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Question;
+use App\Form\QuestionType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class QuestionController extends AbstractController
@@ -15,18 +17,15 @@ class QuestionController extends AbstractController
      */
 
     //Pour le formulaire de création d'une question
-    public function create(){
+    public function create(Request $request){
         $question = new Question();
 
-        $question->setTitle('blabla');
-        $question->setDescription('pif paf pouf');
-        $question->setStatus('debated');
-        $question->setSupports(123);
+        $questionForm = $this->createForm(QuestionType::class, $question);
 
-        //Pour DateTime de php et non celui du dossier, mettre un backslash
-        $question->setCreationDate(new \DateTime());
+        $questionForm->handleRequest($request);
 
-        //Retourne l'entity manager:
+        if($questionForm->isSubmitted()&& $questionForm->isValid()){
+            //Retourne l'entity manager:
         $em = $this->getDoctrine()->getManager();
 
         //On demande à Doctrine de sauvegarder notre instance :
@@ -35,10 +34,16 @@ class QuestionController extends AbstractController
         //pour exécuter :
         $em->flush();
 
-        return $this->render('question/create.html.twig',[
+        //Créer un message flash à afficher sur la prochaine page
+          $this->addFlash('success', "Vous avez ajouter une question avec succès ! Merci pour votre participation");
 
+        //Redirige vers la page de détails
+            return $this->redirectToRoute('question_detail', ['id'=>$question->getId()]);
+        }
+
+        return $this->render('question/create.html.twig',[
+            "questionForm"=>$questionForm->createView()
         ]);
-        //return new Response ('OK')
         //Pour supprimer qqch de la BDD : $em->remove($question);
     }
 

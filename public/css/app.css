@@ -1,10 +1,14 @@
 body {
 
-    background-color: tomato;
+    background-color: lightblue;
     font-family: "Permanent Marker";
 }
 main {
+    flex-grow: 1;
+    }
 
-    min-height: 800px;
-
+.container {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
