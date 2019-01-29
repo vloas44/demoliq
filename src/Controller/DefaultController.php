@@ -32,7 +32,7 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route ("/fonctionnement",name="fonctionnement")
+     * @Route ("/fonctionnement",name="how_to")
      */
     public function fonctionnement()
     {

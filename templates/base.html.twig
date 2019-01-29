@@ -25,7 +25,12 @@
             </main>
 
             <footer>
-                {% block footer %}<a href="{{ path('home') }}">Accueil</a> <a href="{{ path('faq') }}">FAQ</a> <a href="{{ path('cgu') }}">CGU</a> <a href="{{ path('fonctionnement') }}">Fonctionnement</a>{% endblock %}
+                <nav class="nav">
+                {% block footer %}<a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                    <a class="nav-link" href="{{ path('faq') }}">FAQ</a>
+                    <a class="nav-link" href="{{ path('cgu') }}">CGU</a>
+                <a class="nav-link" href="{{ path('how_to') }}">Fonctionnement</a>{% endblock %}
+                </nav>
             </footer>
         </div>
     </body>

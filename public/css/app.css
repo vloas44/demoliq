@@ -3,3 +3,8 @@ body {
     background-color: tomato;
     font-family: "Permanent Marker";
 }
+main {
+
+    min-height: 800px;
+
+}

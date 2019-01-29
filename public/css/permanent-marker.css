@@ -2,7 +2,7 @@
 @font-face {
   font-family: 'Permanent Marker';
   font-style: normal;
-  font-weight: 800;
+  font-weight: 400;
   src: url('../fonts/permanent-marker-v7-latin-regular.eot'); /* IE9 Compat Modes */
   src: local('Permanent Marker Regular'), local('Permanent Marker'),
        url('../fonts/permanent-marker-v7-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
