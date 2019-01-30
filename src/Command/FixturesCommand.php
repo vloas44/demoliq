@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Entity\Question;
+use App\Entity\Subject;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 
@@ -40,16 +41,41 @@ class FixturesCommand extends Command
         $conn = $this->em->getConnection();
         //Désactive la vérification des clefs étrangères
         $conn->query('SET FOREIGN_KEY_CHECKS=0');
+        $conn->query('TRUNCATE subject');
         $conn->query('TRUNCATE message');
         $conn->query('TRUNCATE question');
+        $conn->query('TRUNCATE question_subject');
         //Réactive
         $conn->query('SET FOREIGN_KEY_CHECKS=1');
+
+        $subjects = [
+            "Affaires étrangères", "Affaires européennes", "Agriculture, alimentation, pêche", "Ruralité","Aménagement du territoire","Économie et finance","Culture","Communication","Défense","Écologie et développement durable","Transports","Logement","Éducation","Intérieur","Outre-mer et collectivités territoriales","Immigration","Justice et Libertés","Travail","Santé","Démocratie"];
+
+        //Garder en mémoire nos objets Subject
+        $allsubjects =[];
+        foreach ($subjects as $label){
+            $subject = new Subject();
+            $subject->setLabel($label);
+            $this->em->persist($subject);
+            //On ajoute ce sujet à notre tableau
+            $allsubjects[]= $subject;
+        }
+        $this->em->flush();
 
         for ($i=0;$i<100;$i++){
             $question = new Question();
 
             $question->setTitle($faker->sentence(10));
             $question->setDescription($faker->realText(5000));
+
+            //Ajoute entre 1 et 3 sujets à cette question
+            $num=mt_rand(1,3);
+            for ($j=0;$j<$num;$j++){
+                $s=$faker->randomElement(($allsubjects));
+                $question->addSubject($s);
+            }
+
+
             $question->setStatus($faker->randomElement(['debating','voting','closed']));
             $question->setCreationDate($faker->dateTimeBetween('-1 year','now'));
             $question->setSupports($faker->optional(0.5,0)->numberBetween(0,47000000));

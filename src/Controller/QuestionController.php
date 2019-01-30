@@ -118,14 +118,17 @@ class QuestionController extends AbstractController
     {
         //ce repository nous permet de faire des SELECT
         $questionRepository = $this->getDoctrine()->getRepository(Question::class);
+
+        $questions=$questionRepository->findListQuestionsQB();
+
         //SELECT * FROM question WHERE status = 'debating'
         //ORDER BY  supports DESC LIMIT 1000
-        $questions = $questionRepository->findBy(
-            ['status' => 'debating'],   //where
-            ['supports' => 'DESC'],     //order by
-            1000,                       //limit
-            0                           //offset
-        );
+        //$questions = $questionRepository->findBy(
+            //['status' => 'debating'],   //where
+            //['supports' => 'DESC'],     //order by
+            //1000,                       //limit
+            //0                           //offset
+        //);
 
         //dd($questions);
 

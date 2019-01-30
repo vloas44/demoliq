@@ -5,6 +5,7 @@
 
     <table class="table table-striped">
         <tr>
+            <th>Sujet(s)</th>
             <th>Question</th>
             <th>Appuis</th>
             <th>Date</th>
@@ -14,7 +15,14 @@
         {# affichage des questions ici #}
         {% for question in questions %}
             <tr>
-                <td>{{ question.title }} - {{ question.status}}</td>
+                <td>
+                    {% for subject in question.subjects %}
+                        <div>
+                            {{ subject.label }}
+                        </div>
+                    {% endfor %}
+                </td>
+                <td>{{ question.title }}</td>
                 <td>{{ question.supports }}</td>
                 <td>{{ question.creationDate|date('d-m-Y') }}</td>
                 <td><a class="btn-sm btn-primary"

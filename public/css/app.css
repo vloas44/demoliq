@@ -12,3 +12,6 @@ main {
     min-height: 100vh;
     flex-direction: column;
 }
+.jumbotron{
+    background-color: #71dd8a;
+}
