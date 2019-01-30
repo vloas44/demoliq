@@ -15,6 +15,11 @@ class Question
      * @ORM\PrePersist()
      */
     public function prePersist(){
+
+    }
+
+    public function __construct()
+    {
         $this->setCreationDate(new \DateTime());
         $this->setSupports(0);
         $this->setStatus('debating');
