@@ -1,7 +1,7 @@
 body {
 
     background-color: lightblue;
-    font-family: "Permanent Marker";
+    font-family: Arial;
 }
 main {
     flex-grow: 1;

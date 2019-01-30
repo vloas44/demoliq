@@ -38,7 +38,12 @@ class FixturesCommand extends Command
         $faker= \Faker\Factory::create('fr_FR');
 
         $conn = $this->em->getConnection();
+        //Désactive la vérification des clefs étrangères
+        $conn->query('SET FOREIGN_KEY_CHECKS=0');
+        $conn->query('TRUNCATE message');
         $conn->query('TRUNCATE question');
+        //Réactive
+        $conn->query('SET FOREIGN_KEY_CHECKS=1');
 
         for ($i=0;$i<100;$i++){
             $question = new Question();

@@ -72,6 +72,8 @@ class QuestionController extends AbstractController
         //Formulaire pour entrer des messages
         //Créer une instance de message à associer au formulaire
         $message= new Message();
+        //Pour créer la relation entre les 2 entités
+        $message->setQuestion($question);
         //Créer le formulaire
         $messageForm = $this->createForm(MessageType::class, $message);
         //Gérer la requête
@@ -92,9 +94,12 @@ class QuestionController extends AbstractController
         $messageRepository = $this->getDoctrine()->getRepository(Message::class);
         //récupère les 200 messages les + récents
         $messages = $messageRepository->findBy([
-            'isPublished'=>true],
+            'isPublished'=>true,
+            'question'=>$question],//WHERE
             ['dateCreated'=>'DESC'],
             200);
+
+        //$message->getQuestion()->getTitle();
 
         return $this->render('question/details.html.twig', [
             //passe les messages à twig
