@@ -27,7 +27,10 @@
                         {% if not app.user %}
                         <a class="nav-link" href="{{ path('app_register') }}">S'inscrire</a>
                         <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
-                            {% else %}<a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+                            {% else %}
+                                <p class="nav-link">Pseudo : {{ app.user.username }} </p>
+                                <a class="nav-link" href="{{ path('mon_compte') }}">Mon compte</a>
+                                <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
                         {% endif %}
                     {% endblock %}
                 </nav>

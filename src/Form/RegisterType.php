@@ -16,7 +16,7 @@ class RegisterType extends AbstractType
             ->add('email', TextType::class)
             //->add('roles') Ca fait une erreur
             ->add('password', TextType::class)
-            ->add('username', null, ['label'=>'pseudo :'], TextType::class)
+            ->add('username', TextType::class, ['label'=>'pseudo :'])
             ->add('socialSecurityNumber', TextType::class)
         ;
     }

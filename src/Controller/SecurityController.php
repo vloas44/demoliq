@@ -66,6 +66,14 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * @Route("/profil", name="mon_compte")
+     */
+    public function profil()
+    {
+        return $this->render('security/profil.html.twig');
+    }
+
+    /**
      * @Route("/deconnexion", name="app_logout")
      */
     public function logout (){}

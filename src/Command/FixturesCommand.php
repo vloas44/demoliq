@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Entity\Question;
 use App\Entity\Subject;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 
@@ -11,6 +12,7 @@ use Symfony\Component\Console\Input\InputInterface;
 
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class FixturesCommand extends Command
 {
@@ -18,10 +20,13 @@ class FixturesCommand extends Command
 
     protected $em=null;
 
-    public function __construct(EntityManagerInterface $em, ?string $name = null)
-    {
-        $this->em = $em;
-        parent::__construct($name);
+    public function __construct(
+        EntityManagerInterface $em,
+        UserPasswordEncoderInterface $encoder,
+        ?string $name = null){
+            $this->encoder = $encoder;
+            $this->em = $em;
+            parent::__construct($name);
     }
 
     //Se lance au chargement de Symfony
@@ -56,6 +61,7 @@ class FixturesCommand extends Command
         $conn->query('TRUNCATE message');
         $conn->query('TRUNCATE question');
         $conn->query('TRUNCATE question_subject');
+        $conn->query('TRUNCATE user');
         //Réactive
         $conn->query('SET FOREIGN_KEY_CHECKS=1');
 
@@ -74,13 +80,24 @@ class FixturesCommand extends Command
             $allsubjects[]= $subject;
         }
         $this->em->flush();
+
+
+        $allUsers=[];
+        for ($i=0;$i<40;$i++)
+        {
+            $user = new User();
+            $allUsers[]=$user;
+        }
+
+
         //Barre de progression avec 200 opérations
         $io->progressStart(200);
 
         for ($i=0;$i<200;$i++){
             $io->progressAdvance(1);
-            $question = new Question();
 
+            $question = new Question();
+            $question->setUser($faker->randomElement($allUsers));
             $question->setTitle($faker->sentence(10));
             $question->setDescription($faker->realText(5000));
 

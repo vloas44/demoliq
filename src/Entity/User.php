@@ -45,6 +45,10 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @Assert\Length(min="2",
+     *      max="25",
+     *      minMessage="2 caractères SVP",
+     *      maxMessage="25 caractères SVP")
      * @Assert\NotBlank(message="veuillez remplir ce champ")
      * @ORM\Column(type="string", length=255)
      */
@@ -138,7 +142,7 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function setUsername(string $username): self
+    public function setUsername($username): self
     {
         $this->username = $username;
 
