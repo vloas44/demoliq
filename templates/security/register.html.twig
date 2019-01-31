@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Formulaire d'inscription</h1>
+    {#Affiche le formulaire#}
+    {{ form_start(registerForm, {'attr':{'novalidate':'novalidate'}}) }}
+    {{ form_widget(registerForm) }}
+    {{ form_errors(registerForm) }}
+    <button class="btn btn-success">Envoyer !</button>
+    {{ form_end(registerForm) }}
+
+    <h4>Vous avez déjà un compte ?</h4>
+    <a href="{{ path('app_login') }}">Connectez-vous ici !</a>
+
+{% endblock %}
+
+{% block title %}Register{% endblock %}
+

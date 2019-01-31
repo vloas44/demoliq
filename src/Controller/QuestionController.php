@@ -20,6 +20,12 @@ class QuestionController extends AbstractController
 
     //Pour le formulaire de création d'une question
     public function create(Request $request){
+
+        //Empêche l'accès à moins que l'utilisateur n'ait le role_user
+        //if(!$this->isGranted("ROLE_USER")){
+        //    throw $this->createAccessDeniedException("Toi, tu sors et tu te connectes");
+        //}
+
         $question = new Question();
 
         $questionForm = $this->createForm(QuestionType::class, $question);

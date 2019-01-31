@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <h1>{{ question.title }} <a href="#" class="btn btn-success">Appuyer cette proposition</a></h1>
+    <h1>{{ question.title }} {% if app.user %}<a href="#" class="btn btn-success">Appuyer cette proposition</a>{% endif %}</h1>
 
     <div>{{ question.supports }} appuis </div>
     <br>
@@ -13,14 +13,15 @@
     <div>Date et heure de création : {{ question.creationDate|date('d-m-Y H:i:s') }}</div>
     <div class="jumbotron">{{ question.description }}</div>
     <hr>
-
+    {% if app.user %}
     <h2>Ajoutez votre contribution au débat</h2>
-    {# @todo : afficher les messages reliés à cette question#}
+    {# affiche les messages reliés à cette question#}
     {{ form_start(messageForm, {'attr':{'novalidate':'novalidate'}}) }}
     {{ form_widget(messageForm) }}
     {{ form_errors(messageForm) }}
     <button class="btn btn-success">Envoyer !</button>
     {{ form_end(messageForm) }}
+    {% endif %}
     <hr>
     <h2>Vos messages</h2>
     <br>

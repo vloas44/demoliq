@@ -18,6 +18,19 @@
         <div class="container">
             <header>
                 <a href="{{ path('home') }}"><img src="{{ asset('img/icon.jpg')}}" alt="icon" style="width:20px;height:20px;"> DEMOLIQ</a>
+                <nav class="nav">
+                    {% block header %}<a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                        <a class="nav-link" href="{{ path('faq') }}">FAQ</a>
+                        <a class="nav-link" href="{{ path('cgu') }}">CGU</a>
+                        <a class="nav-link" href="{{ path('how_to') }}">Fonctionnement</a>
+                        <a class="nav-link" href="{{ path('question_list') }}">Questions</a>
+                        {% if not app.user %}
+                        <a class="nav-link" href="{{ path('app_register') }}">S'inscrire</a>
+                        <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
+                            {% else %}<a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+                        {% endif %}
+                    {% endblock %}
+                </nav>
             </header>
 
             <main>

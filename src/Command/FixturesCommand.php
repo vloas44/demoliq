@@ -32,6 +32,11 @@ class FixturesCommand extends Command
     //lorsqu'on tape la commande
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        //On dit que la mémoire allouée est de 1000Mo
+        ini_set('memory_limit','1G');
+        //Le temps d'éxécution est de 200s
+        ini_set('max_execution_time',200);
+
         $io = new SymfonyStyle($input, $output);
         $io->text("Coucou");
         $io->success("Now loading fixtures");
