@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class FixturesCommand extends Command
 {
     protected static $defaultName = 'app:fixtures';
-
+    protected $encoder = null;
     protected $em=null;
 
     public function __construct(
@@ -83,9 +83,23 @@ class FixturesCommand extends Command
 
 
         $allUsers=[];
+        $io->text("creating users...");
         for ($i=0;$i<40;$i++)
         {
             $user = new User();
+
+            $user->setUsername($faker->unique()->userName);
+
+            $password=$user->getUsername();
+
+            $hash=$this->encoder->encodePassword($user, $password);
+            $user->setPassword($hash);
+
+            $user->setEmail($faker->unique()->email);
+            $user->setSocialSecurityNumber($faker->ean13 . $faker->numberBetween(10,99));
+
+            $this->em->persist($user);
+
             $allUsers[]=$user;
         }
 
@@ -97,7 +111,7 @@ class FixturesCommand extends Command
             $io->progressAdvance(1);
 
             $question = new Question();
-            $question->setUser($faker->randomElement($allUsers));
+            $question->setAuthor($faker->randomElement($allUsers));
             $question->setTitle($faker->sentence(10));
             $question->setDescription($faker->realText(5000));
 

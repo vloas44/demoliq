@@ -82,6 +82,12 @@ class Question
      */
     private $subjects;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="questions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
 
     public function getId(): ?int
     {
@@ -201,6 +207,18 @@ class Question
         if ($this->subjects->contains($subject)) {
             $this->subjects->removeElement($subject);
         }
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
