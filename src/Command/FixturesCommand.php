@@ -38,6 +38,12 @@ class FixturesCommand extends Command
 
         $faker= \Faker\Factory::create('fr_FR');
 
+        $answer=$io->ask("sure truncating ?");
+        if($answer==="no"){
+            $io->text("abort");
+            die();
+        }
+
         $conn = $this->em->getConnection();
         //Désactive la vérification des clefs étrangères
         $conn->query('SET FOREIGN_KEY_CHECKS=0');
@@ -47,6 +53,8 @@ class FixturesCommand extends Command
         $conn->query('TRUNCATE question_subject');
         //Réactive
         $conn->query('SET FOREIGN_KEY_CHECKS=1');
+
+        $io->text("tables are now empty.I hope you are not in prod !");
 
         $subjects = [
             "Affaires étrangères", "Affaires européennes", "Agriculture, alimentation, pêche", "Ruralité","Aménagement du territoire","Économie et finance","Culture","Communication","Défense","Écologie et développement durable","Transports","Logement","Éducation","Intérieur","Outre-mer et collectivités territoriales","Immigration","Justice et Libertés","Travail","Santé","Démocratie"];
@@ -61,8 +69,11 @@ class FixturesCommand extends Command
             $allsubjects[]= $subject;
         }
         $this->em->flush();
+        //Barre de progression avec 200 opérations
+        $io->progressStart(200);
 
-        for ($i=0;$i<100;$i++){
+        for ($i=0;$i<200;$i++){
+            $io->progressAdvance(1);
             $question = new Question();
 
             $question->setTitle($faker->sentence(10));
@@ -80,9 +91,15 @@ class FixturesCommand extends Command
             $question->setCreationDate($faker->dateTimeBetween('-1 year','now'));
             $question->setSupports($faker->optional(0.5,0)->numberBetween(0,47000000));
 
+            //Ajouter des messages sur les questions (coller le code de Guillaume ici)******
+
+
             $this->em->persist($question);
         }
+        $io->progressFinish();
+
         $this->em->flush();
+
         $io->success("Done!");
     }
 }

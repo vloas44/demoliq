@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Question;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -46,9 +47,10 @@ class QuestionRepository extends ServiceEntityRepository
         $query=$this->getEntityManager()->createQuery($dql);
         $query->setMaxResults(200);
         $query->setFirstResult(0);
-        $questions=$query->getResult();
+        //on remplace le $query par le paginator
+        $paginator = new Paginator($query);
 
-        return $questions;
+        return $paginator;
     }
 
 
