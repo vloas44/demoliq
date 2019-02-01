@@ -21,15 +21,19 @@
     {{ form_errors(messageForm) }}
     <button class="btn btn-success">Envoyer !</button>
     {{ form_end(messageForm) }}
+    {% else %}
+       {# <a href="{{ path(app_login) }}">Connectez-vous pour pouvoir laisser un message</a>#}
     {% endif %}
     <hr>
     <h2>Vos messages</h2>
     <br>
     {% for message in messages %}
-        <div>Par # - {{ message.dateCreated|date('d-m-Y') }}</div>
+      <div class="clapclap">
+        <div>Par {{ app.user.username }} - {{ message.dateCreated|date('d-m-Y') }}</div>
         <div>{{ message.content|nl2br }}</div>
-        <div><img src="{{ asset('img/clap.png')}}" alt="icon" style="width:20px;height:20px;">{{ message.claps }} claps</img></div>
+        <div class="clap btn btn-success" data-url="{{ path('api_clap_post', {'id': message.id}) }}"><img src="{{ asset('img/clap.png')}}" alt="icon" style="width:20px;height:20px;"/><span class="">{{ message.claps }}</span> claps</div>
         <br>
+      </div>
     {% endfor %}
 
 {% endblock %}

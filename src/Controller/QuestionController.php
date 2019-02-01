@@ -87,6 +87,8 @@ class QuestionController extends AbstractController
         if($messageForm->isSubmitted()&& $messageForm->isValid()) {
             //Récupère l'entity manager:
             $em = $this->getDoctrine()->getManager();
+
+            $message->setAuthor($this->getUser());
             //On demande à Doctrine de sauvegarder notre instance :
             $em->persist($message);
             //pour exécuter :
